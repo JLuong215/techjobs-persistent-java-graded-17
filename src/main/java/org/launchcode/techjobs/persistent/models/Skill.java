@@ -1,33 +1,39 @@
 package org.launchcode.techjobs.persistent.models;
 
 import jakarta.persistence.Entity;
-import jakarta.validation.constraints.Size;
-import org.springframework.core.SpringVersion;
+import jakarta.persistence.ManyToMany;
+import jakarta.validation.constraints.NotBlank;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Skill extends AbstractEntity {
 
-    @Size(max = 100)
+    @NotBlank
     private String description;
 
-    private String job;
+    @ManyToMany(mappedBy = "skills")
+    private final List<Job> jobs = new ArrayList<>();
 
-    public Skill (){}
+    public Skill() {}
 
-    public  String getDescription() {
+    public Skill(String description) {
+        super();
+        this.description = description;
+//        this.jobs = jobs;
+    }
+
+
+    public List<Job> getJobs() {
+        return jobs;
+    }
+
+    public String getDescription() {
         return description;
     }
 
-    public void setDescription( String description) {
+    public void setDescription(String description) {
         this.description = description;
     }
-
-    public String getJob() {
-        return job;
-    }
-
-    public void setJob(String job) {
-        this.job = job;
-    }
 }
-
