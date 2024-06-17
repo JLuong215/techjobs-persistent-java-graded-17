@@ -33,7 +33,7 @@ public class HomeController {
     public String index(Model model) {
 
         model.addAttribute("title", "MyJobs");
-        model.addAttribute("job", jobRepository.findAll());
+        model.addAttribute("jobs", jobRepository.findAll());
 
         return "index";
     }
@@ -66,10 +66,11 @@ public class HomeController {
 
         List<Skill> skillObjs = (List<Skill>) skillRepository.findAllById(skills);
         newJob.setSkills(skillObjs);
+
         jobRepository.save(newJob);
 
         model.addAttribute("jobs", jobRepository.findAll());
-        return "redirect:/";
+        return "redirect:";
     }
 
     @GetMapping("view/{jobId}")
@@ -80,7 +81,7 @@ public class HomeController {
             model.addAttribute("job", job);
             return "view";
         } else {
-            return "redirect:/";
+            return "redirect:../";
         }
     }
 
