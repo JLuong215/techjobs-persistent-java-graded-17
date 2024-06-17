@@ -40,6 +40,7 @@ public class EmployerController {
             return "employers/add";
         }
         employerRepository.save(newEmployer);
+        model.addAttribute("employers", employerRepository.findAll());
         return "redirect:";
     }
 
